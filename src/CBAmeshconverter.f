@@ -261,8 +261,8 @@ c
               write(359,333) 2
             endif
             write(359,333)
-     &        numvert(i,j-1,k-1,nb),numvert(i,j-1,k,nb),
-     &        numvert(i,j,k,nb),numvert(i,j,k-1,nb)
+     &        numvert(i,j-1,k-1,nb),numvert(i,j,k-1,nb),
+     &        numvert(i,j,k,nb),numvert(i,j-1,k,nb)
             if(i.eq.nptsi(nb)-1.and.i2tag(nb).ne.2) then
               write(359,333) i2tag(nb)
             else
@@ -277,16 +277,16 @@ c
               write(359,333) 2
             endif
             write(359,333)
-     &        numvert(i-1,j,k-1,nb),numvert(i,j,k-1,nb),
-     &        numvert(i,j,k,nb),numvert(i-1,j,k,nb)
+     &        numvert(i-1,j,k-1,nb),numvert(i-1,j,k,nb),
+     &        numvert(i,j,k,nb), numvert(i,j,k-1,nb)
               if(j.eq.nptsj(nb)-1.and.j2tag(nb).ne.2) then
                 write(359,333) j2tag(nb)
               else
                 write(359,333) 2
               endif
             write(359,333)
-     &        numvert(i-1,j-1,k-1,nb),numvert(i,j-1,k-1,nb),
-     &        numvert(i,j,k-1,nb),numvert(i-1,j,k-1,nb)
+     &        numvert(i-1,j-1,k-1,nb),numvert(i-1,j,k-1,nb),
+     &        numvert(i,j,k-1,nb),numvert(i,j-1,k-1,nb)
               if(k.eq.1.and.k1tag(nb).ne.2) then
                 write(359,333) k1tag(nb)
               else
@@ -320,7 +320,7 @@ c
 !********************
          do nn=1,6
 !********************
-         read(359,*) nv4,nv3,nv2,nv1
+         read(359,*) nv1,nv2,nv3,nv4
          read(359,*) nboundtag
          if(nf.eq.0) then
            nf=nf+1
