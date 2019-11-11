@@ -414,7 +414,7 @@ c
 ! WRITE OUTPUT FILES
 !
        open(100,file='cellFace.txt')
-       write(100,*) ncells+ncellshalo,nfaces
+       write(100,*) ncells+ncellshalo,ncells,nfaces
        do nc=1,ncells
          do nf=1,6
            write(100,*) ncellfaces(nc,nf)-1
