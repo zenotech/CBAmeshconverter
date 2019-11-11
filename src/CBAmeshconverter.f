@@ -414,20 +414,20 @@ c
 ! WRITE OUTPUT FILES
 !
        open(100,file='cellFace.txt')
-       write(100,*) ncells+ncellshalo,ncells,nfaces
+       write(100,*) ncells,nfaces
        do nc=1,ncells
          do nf=1,6
            write(100,*) ncellfaces(nc,nf)-1
          enddo
        enddo
-       do nc=ncells+1,ncells+ncellshalo
-         write(100,*) nhalofaces(nc)-1
-       enddo
+!       do nc=ncells+1,ncells+ncellshalo
+!         write(100,*) nhalofaces(nc)-1
+!       enddo
        close(100)
 !
        open(100,file='cellType.txt')
        write(100,*) ncells+ncellshalo
-       do nc=1,ncells+ncellshalo
+       do nc=1,ncells
          write(100,*) 208
        enddo
        close(100)
@@ -442,7 +442,7 @@ c
          elseif(ntag(nf).eq.1) then
            write(100,*) 9 !Farfield
          elseif(ntag(nf).eq.2) then
-           write(100,*) 2 !Interior
+           write(100,*) 0 !Interior
          endif
        enddo
        close(100)

@@ -4,6 +4,7 @@ import h5py
 import numpy as np
 import csv
 import os
+import sys
 
 # Read in data
 
@@ -30,7 +31,7 @@ l_faceType=len(faceType_data);
 l_nodeVertex=len(nodeVertex_data);
 
 # Create file type
-name = input()
+name = sys.argv[1] #input()
 base=os.path.splitext(name)[0]
 f = h5py.File(base + ".h5","w")
 
@@ -39,8 +40,8 @@ f = h5py.File(base + ".h5","w")
 mesh = f.create_group("mesh")
 
 # Assign attributes
-mesh.attrs.create("numFaces", attribute_data[2], shape=(1,1))
-mesh.attrs.create("numCells", attribute_data[1], shape=(1,1))
+mesh.attrs.create("numFaces", attribute_data[1], shape=(1,1))
+mesh.attrs.create("numCells", attribute_data[0], shape=(1,1))
 
 # Create datasets
 cellFace = mesh.create_dataset("cellFace", data=cellFace_data)
