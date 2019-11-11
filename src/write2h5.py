@@ -16,6 +16,9 @@ faceNodes_data = np.loadtxt('faceNodes.txt', dtype='i', skiprows=1)
 faceType_data = np.loadtxt('faceType.txt', dtype='i', skiprows=1)
 nodeVertex_data = np.loadtxt('nodeVertex.txt', dtype='d', skiprows=1)
 
+# Read in Attribute data
+attribute_data = np.loadtxt('cellFace.txt', dtype='i', max_rows=1)
+
 # Identify dataset size
 l_cellFace=len(cellFace_data);
 l_cellType=len(cellType_data);
@@ -34,6 +37,10 @@ f = h5py.File(base + ".h5","w")
 # Create groups
 
 mesh = f.create_group("mesh")
+
+# Assign attributes
+mesh.attrs.create("numFaces", attribute_data[2], shape=(1,1))
+mesh.attrs.create("numCells", attribute_data[1], shape=(1,1))
 
 # Create datasets
 cellFace = mesh.create_dataset("cellFace", data=cellFace_data)
