@@ -13,7 +13,7 @@ read filename
 
 
 # Pack data into h5 file
-python3 write2h5.py <<< $filename
+python write2h5.py $filename
 
 
 # remove spare files
@@ -25,6 +25,6 @@ rm faceNodes.txt
 rm faceType.txt
 rm cellType.txt
 rm nodeVertex.txt
-rm *.dat
+#rm *.dat
 
 echo Program Complete!

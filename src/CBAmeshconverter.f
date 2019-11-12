@@ -261,8 +261,8 @@ c
               write(359,333) 2
             endif
             write(359,333)
-     &        numvert(i,j-1,k-1,nb),numvert(i,j-1,k,nb),
-     &        numvert(i,j,k,nb),numvert(i,j,k-1,nb)
+     &        numvert(i,j-1,k-1,nb),numvert(i,j,k-1,nb),
+     &        numvert(i,j,k,nb),numvert(i,j-1,k,nb)
             if(i.eq.nptsi(nb)-1.and.i2tag(nb).ne.2) then
               write(359,333) i2tag(nb)
             else
@@ -277,16 +277,16 @@ c
               write(359,333) 2
             endif
             write(359,333)
-     &        numvert(i-1,j,k-1,nb),numvert(i,j,k-1,nb),
-     &        numvert(i,j,k,nb),numvert(i-1,j,k,nb)
+     &        numvert(i-1,j,k-1,nb),numvert(i-1,j,k,nb),
+     &        numvert(i,j,k,nb), numvert(i,j,k-1,nb)
               if(j.eq.nptsj(nb)-1.and.j2tag(nb).ne.2) then
                 write(359,333) j2tag(nb)
               else
                 write(359,333) 2
               endif
             write(359,333)
-     &        numvert(i-1,j-1,k-1,nb),numvert(i,j-1,k-1,nb),
-     &        numvert(i,j,k-1,nb),numvert(i-1,j,k-1,nb)
+     &        numvert(i-1,j-1,k-1,nb),numvert(i-1,j,k-1,nb),
+     &        numvert(i,j,k-1,nb),numvert(i,j-1,k-1,nb)
               if(k.eq.1.and.k1tag(nb).ne.2) then
                 write(359,333) k1tag(nb)
               else
@@ -414,20 +414,20 @@ c
 ! WRITE OUTPUT FILES
 !
        open(100,file='cellFace.txt')
-       write(100,*) ncells+ncellshalo,nfaces
+       write(100,*) ncells,nfaces
        do nc=1,ncells
          do nf=1,6
            write(100,*) ncellfaces(nc,nf)-1
          enddo
        enddo
-       do nc=ncells+1,ncells+ncellshalo
-         write(100,*) nhalofaces(nc)-1
-       enddo
+!       do nc=ncells+1,ncells+ncellshalo
+!         write(100,*) nhalofaces(nc)-1
+!       enddo
        close(100)
 !
        open(100,file='cellType.txt')
        write(100,*) ncells+ncellshalo
-       do nc=1,ncells+ncellshalo
+       do nc=1,ncells
          write(100,*) 208
        enddo
        close(100)
@@ -442,7 +442,7 @@ c
          elseif(ntag(nf).eq.1) then
            write(100,*) 9 !Farfield
          elseif(ntag(nf).eq.2) then
-           write(100,*) 2 !Interior
+           write(100,*) 0 !Interior
          endif
        enddo
        close(100)
