@@ -138,7 +138,7 @@ c
           do j=0,nptsj(nb)-1
             do i=0,nptsi(nb)-1
               x(i,j,1,nb)=x(i,j,0,nb)
-              y(i,j,1,nb)=y(i,j,0,nb) - 1.0d0
+              y(i,j,1,nb)=y(i,j,0,nb) + 1.0d0
               z(i,j,1,nb)=z(i,j,0,nb)
             enddo
           enddo
@@ -252,7 +252,7 @@ c
         do j=1,nptsj(nb)-1
           do i=1,nptsi(nb)-1
             write(359,333) numcell(i,j,k,nb),6,4
-            
+
             ! I_faces
             ! I-1 face
             write(359,333)
@@ -540,8 +540,7 @@ c
       DEALLOCATE(nptsj)
       DEALLOCATE(nptsk)
 !
-      call system('rm cellfacedata.dat')
-      call system('rm facescells.dat')
+!      call system('rm cellfacedata.dat')
       stop
 !
       end program cbameshconverter
