@@ -540,7 +540,8 @@ c
       DEALLOCATE(nptsj)
       DEALLOCATE(nptsk)
 !
-!      call system('rm cellfacedata.dat')
+      call system('rm cellfacedata.dat')
+      call system('rm facescells.dat')
       stop
 !
       end program cbameshconverter
