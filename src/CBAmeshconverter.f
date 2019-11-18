@@ -133,6 +133,7 @@ c
 ! Check if case is 2D or 3D
 !
       IF(TWOD) THEN
+        print*, "Mesh is 2D"
         do nb=1,nblock
           nptsk(nb)=2
           do j=0,nptsj(nb)-1
@@ -276,8 +277,8 @@ c
             ! J_faces
             ! J-1 face
             write(359,333)
-     &        numvert(i-1,j-1,k-1,nb),numvert(i-1,j-1,k,nb),
-     &        numvert(i,j-1,k,nb),numvert(i,j-1,k-1,nb)
+     &        numvert(i-1,j-1,k-1,nb),numvert(i,j-1,k-1,nb),
+     &        numvert(i,j-1,k,nb),numvert(i-1,j-1,k,nb)
             if(j.eq.1.and.j1tag(nb).ne.2) then
               write(359,333) j1tag(nb)
             else
@@ -285,8 +286,8 @@ c
             endif
             ! J face
             write(359,333)
-     &        numvert(i-1,j,k-1,nb),numvert(i,j,k-1,nb),
-     &        numvert(i,j,k,nb), numvert(i-1,j,k,nb)
+     &        numvert(i-1,j,k-1,nb),numvert(i-1,j,k,nb),
+     &        numvert(i,j,k,nb), numvert(i,j,k-1,nb)
               if(j.eq.nptsj(nb)-1.and.j2tag(nb).ne.2) then
                 write(359,333) j2tag(nb)
               else
@@ -332,7 +333,7 @@ c
 !********************
          do nn=1,6
 !********************
-         read(359,*) nv4,nv3,nv2,nv1
+         read(359,*) nv1,nv2,nv3,nv4
          read(359,*) nboundtag
          if(nf.eq.0) then
            nf=nf+1
