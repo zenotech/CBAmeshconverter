@@ -133,12 +133,13 @@ c
 ! Check if case is 2D or 3D
 !
       IF(TWOD) THEN
+        print*, "INDENTIFIED 2D MESH"
         do nb=1,nblock
           nptsk(nb)=2
           do j=0,nptsj(nb)-1
             do i=0,nptsi(nb)-1
               x(i,j,1,nb)=x(i,j,0,nb)
-              y(i,j,1,nb)=y(i,j,0,nb) - 1.0d0
+              y(i,j,1,nb)=y(i,j,0,nb) + 1.0d0
               z(i,j,1,nb)=z(i,j,0,nb)
             enddo
           enddo
@@ -252,6 +253,9 @@ c
         do j=1,nptsj(nb)-1
           do i=1,nptsi(nb)-1
             write(359,333) numcell(i,j,k,nb),6,4
+
+            ! I_faces
+            ! I-1 face
             write(359,333)
      &        numvert(i-1,j-1,k-1,nb),numvert(i-1,j-1,k,nb),
      &        numvert(i-1,j,k,nb),numvert(i-1,j,k-1,nb)
@@ -260,6 +264,7 @@ c
             else
               write(359,333) 2
             endif
+            ! I face
             write(359,333)
      &        numvert(i,j-1,k-1,nb),numvert(i,j,k-1,nb),
      &        numvert(i,j,k,nb),numvert(i,j-1,k,nb)
@@ -268,6 +273,9 @@ c
             else
               write(359,333) 2
             endif
+
+            ! J_faces
+            ! J-1 face
             write(359,333)
      &        numvert(i-1,j-1,k-1,nb),numvert(i,j-1,k-1,nb),
      &        numvert(i,j-1,k,nb),numvert(i-1,j-1,k,nb)
@@ -276,6 +284,7 @@ c
             else
               write(359,333) 2
             endif
+            ! J face
             write(359,333)
      &        numvert(i-1,j,k-1,nb),numvert(i-1,j,k,nb),
      &        numvert(i,j,k,nb), numvert(i,j,k-1,nb)
@@ -284,6 +293,9 @@ c
               else
                 write(359,333) 2
               endif
+
+            ! K_faces
+            ! K-1 face
             write(359,333)
      &        numvert(i-1,j-1,k-1,nb),numvert(i-1,j,k-1,nb),
      &        numvert(i,j,k-1,nb),numvert(i,j-1,k-1,nb)
@@ -292,6 +304,7 @@ c
               else
                 write(359,333) 2
               endif
+              ! K face
             write(359,333)
      &        numvert(i-1,j-1,k,nb),numvert(i,j-1,k,nb),
      &        numvert(i,j,k,nb),numvert(i-1,j,k,nb)
@@ -320,7 +333,7 @@ c
 !********************
          do nn=1,6
 !********************
-         read(359,*) nv1,nv2,nv3,nv4
+         read(359,*) nv4,nv3,nv2,nv1
          read(359,*) nboundtag
          if(nf.eq.0) then
            nf=nf+1
@@ -529,6 +542,7 @@ c
       DEALLOCATE(nptsk)
 !
       call system('rm cellfacedata.dat')
+      call system('rm facescells.dat')
       stop
 !
       end program cbameshconverter
